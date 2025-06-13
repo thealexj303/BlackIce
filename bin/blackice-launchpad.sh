@@ -24,7 +24,8 @@ if ! tmux has-session -t "$SESSION" 2>/dev/null; then
 
     # Split Pane 2 horizontally -> Pane 4: playerctl
     tmux split-window -v -t "$SESSION":0.1
-    tmux send-keys -t "$SESSION":0.3 'playerctl metadata --follow' C-m
+    tmux send-keys -t "$SESSION":0.3 'sleep 0.5' C-m
+    tmux send-keys -t "$SESSION" 'playerctl --follow metadata' C-m
 
 fi
 
