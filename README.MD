@@ -54,7 +54,7 @@ __Terminal Emulator:__ Kitty
 
 __Terminal Multiplexer:__ Tmux
 
-__System Control/Monitoring:__ playerctl,  neofetch, notify-send, gotop, bpytop, glances
+__System Control/Monitoring:__ playerctl,  neofetch, notify-send, gotop, btop, glances
 
 __Security Tools:__ 
 
