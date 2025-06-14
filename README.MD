@@ -22,7 +22,7 @@ BlackIce enhances system control, integrates a robust suite of security tools, a
 
 ## Technologies
 
-### Project DEvelopment Tools
+### Project Development Tools
 
 - __ChatGpt:__ Used to identify core technologies, scope the project, and develop the BlackIce defense fraimework while maintaining day-to-day activities.
 
