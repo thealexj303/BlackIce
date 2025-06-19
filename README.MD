@@ -270,7 +270,7 @@ COMING SOON
 
 ## Note to Readers
 
-This project - and my tech journey - us still in its early stages. As I grow and learn, the system will evolve in real time. Currently much of this repository are experimental, in progress, or actively under revision.
+This project - and my tech journey - is still in its early stages. As I grow and learn, the system will evolve in real time. Currently much of this repository are experimental, in progress, or actively under revision.
 
 I am sharing the process openly as both a personal learning record and a collaborative resource. Whether you are here to learn, explore, or improve your own practice I welcome your ideas and feedback,
 
