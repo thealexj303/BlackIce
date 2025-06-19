@@ -1,4 +1,4 @@
-# Project: BlackIce
+# Project: BlackIce  `Phase 1 Complete  | Phase 2: In Progress`
 
 A self-contained, threat-aware, polished workstation with automation, introspection, and sharp control. We are not building on top of Arch - we are evolving the system.
 
@@ -10,9 +10,9 @@ A self-contained, threat-aware, polished workstation with automation, introspect
 
 ## Why BlackIce
 
-The primary goal of the project is to evolve a stock Arch system into an advanced, secure, and controllable workstation. Ultimately, BlackIce adds a dedicated, secure and efficient environment for threat operations to the network. The system enables simulation of offensive security and threat monitoring, providing not only a hardened workstation, but also a tool to help current and future cybersecurity students better understand workstation security and hardening - without sacrificing the user experience
+The primary goal of the project is to evolve a stock Arch system into an advanced, secure, and controllable workstation. Ultimately, BlackIce adds a dedicated, secure and efficient environment for threat operations within a local or remote network. The system enables simulation of offensive security and threat monitoring, providing not only a hardened workstation, but also a tool to help current and future cybersecurity students better understand workstation security and hardening - without sacrificing the user experience
 
-BlackIce enhances system control, integrates a robust suite of security tools, and delivers a sharp, modern interface. I envision BlackIce evolving into a Network Operation Control Center (NOCC), lunleashing its capabilities across a network and deepening understanding of workstation and network security principles.
+BlackIce enhances system control, integrates a robust suite of security tools, and delivers a sharp, modern interface. I envision BlackIce evolving into a Network Operation Control Center (NOCC), unleashing its capabilities across a network and deepening understanding of workstation and network security principles.
 
 ## Target Audience
 
@@ -24,9 +24,9 @@ BlackIce enhances system control, integrates a robust suite of security tools, a
 
 ### Project Development Tools
 
-- __ChatGpt:__ Used to identify core technologies, scope the project, and develop the BlackIce defense fraimework while maintaining day-to-day activities.
+- __ChatGpt:__ Used to identify core technologies, scope the project, and develop the BlackIce defense framework while maintaining day-to-day activities.
 
-- __Google Gemini:__ Helped provide an initial scaffold for project documentation enhancing quality of Black Ice documentation structure.
+- __Google Gemini:__ Helped provide an initial scaffold for project documentation enhancing quality of BlackIce documentation structure.
 
 ### Core Technologies
 
@@ -64,7 +64,7 @@ __Security Tools:__
 - ufw / nftables
 - clamav
 - lynis
-- chrootkit
+- chkrootkit
 - rkhunter
 
 __Recon & Analysis:__ whois, amass, dnsx, httpx, subfinder, nmap, tcpdump, mitmproxy, dnstwist, tshark
@@ -105,25 +105,7 @@ __User Dotfile Management:__ Chezmoi
 | `~.config/hypr/`   | Configuration files for Hyprland Hyprpaper and Hyprlock |
 
 ⚙️ You can add or remove contents from ~/.local/share/chezmoi to match your environment. The goal is flexible, version-controlled system deployment across multiple machines.
-
----
-
-### Threat Stack 
-
-#### System Defense Toolkit 
-
-- __System hardening, integrity checks, and  malware detection__
-    
-- `auditd`
-- `aide`
-- `etckeeper`
-- `ufw` / `nftables`
-- `clamav`
-- `lynis`
-- `chkrootkit`
-- `rkhunter`
-
-#### Recon & Analysis 
+fault or self-contained
 
 __Recon Utilities__
 
@@ -201,7 +183,7 @@ __Misc Details__
 -__Remote Access:__
      - `tailscale`
      - `wireguard`
-     - Terminal metrics via `gotop`, `bpytop`, or `glances`
+     - Terminal metrics via tools such as `gotop`, `btop`, or `glances`
 
 __Local Browser Dashboard:__
     - Static HTML dashborad with shell > JSON > JS pipeline
@@ -215,11 +197,11 @@ This section outlines the flow of data as it moves through the BlackIce system -
 
 - __Configuration Sync:__
 
- User Dotfiles are managed with 'chezmoi', enabling moudlar version-controlled dotfile syncing across systems.
+ User Dotfiles are managed with 'chezmoi', enabling modular version-controlled dotfile syncing across systems.
 
  - __System Logging & Monitoring__
 
- Tools like `auditd`, `aide`, and custom scripts collect logs, integrity data, and runtime metrics. Output is visualized with terminal tools  (`gotop`, `bpytop`, `glances`).
+ Tools like `auditd`, `aide`, and custom scripts collect logs, integrity data, and runtime metrics. Output is visualized with terminal tools  (`gotop`, `btop`, `glances`).
  
  - __Recon & Threat Analysis:__
 
@@ -256,15 +238,15 @@ COMING SOON
 
 COMING SOON
 
-## Useage
+## Usage
 
 COMING SOON
 
 ## Future Enhancements
 
-- CoreLock (Advanced hadening + compliance)
+- CoreLock (Advanced hardening + compliance)
 - Neuron (Ai integration + automation)
-- BlackIce Satellite (network expnasion)
+- BlackIce Satellite (network expansion)
 - BlackIce Forge (build/deploy tools)
 
 
@@ -288,7 +270,7 @@ COMING SOON
 
 ## Note to Readers
 
-This project - and my tech journey - us still in its early stages. As I grow and learn, the system will evolve in real time. Some parts of this repository are experimental, in progress, or actively being reworked.
+This project - and my tech journey - us still in its early stages. As I grow and learn, the system will evolve in real time. Currently much of this repository are experimental, in progress, or actively under revision.
 
 I am sharing the process openly as both a personal learning record and a collaborative resource. Whether you are here to learn, explore, or improve your own practice I welcome your ideas and feedback,
 
@@ -296,7 +278,7 @@ Should you spot areas that could be improved, clarified, or rethought - please s
 
 Thank You for checking out BlackIce
 
-Sincererly, 
+Sincerely, 
 Alex
 
 __PS - Documentation templates and advice are always appreciated!__

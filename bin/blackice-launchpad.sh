@@ -16,7 +16,11 @@ if ! tmux has-session -t "$SESSION" 2>/dev/null; then
     tmux send-keys -t "$SESSION":0.0 'while true; do 
         clear;
         sleep 0.1; printf "\n\n\n"; 
-        fastfetch; sleep 10;
+        fastfetch;
+        printf "\n\n\n";
+        echo "available-updates:";
+        checkupdates;
+        sleep 10;
         clear;
         sleep 0.1; printf "\n\n\n"; printf "\n\n\n";
         echo "Block Devices with File System Information"; 
@@ -46,7 +50,7 @@ if ! tmux has-session -t "$SESSION" 2>/dev/null; then
         printf "\n\n\n"
         echo "Public IP";
         curl -s ifconfig.me;
-        printf "\n\n\n"
+        printf "\n\n\n"3
         echo "📡 Routing Table";
         ip route;
         printf "\n\n\n"
