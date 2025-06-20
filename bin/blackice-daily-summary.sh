@@ -8,6 +8,29 @@
 set -euo pipefail
 trap 'echo "❌ Error on line $LINENO";  exit 1' ERR
 
+# Default behaviors
+
+USE_STDOUT=false
+USE_NOTIFY=true
+ARCHIVE=true
+CUSTOM_DATE="today"
+
+# Parse CLI Flags
+for arg in "$@";  do
+    case $arg in
+        --stdout) USE_STDOUT=true ;;
+        --silent) USE_NOTIFY=false ;;
+        --no-archive) ARCHIVE=false ;;
+        --date=*) CUSTOM_DATE="${arg#*=}" ;;
+        --help)
+            echo "Useage: $0 [--stdout] [--silent] [--date=YYYY-MM-DD] [--no-archive] [--help]"
+            exit 0
+            ;;
+        *) echo "❌ Unkown Flag: $arg" >&2; exit 1 ;;
+    esac
+done
+
+
 # Require root privilege to run script
 if [[ $EUID -ne 0 ]]; then
     echo "❌ This script must be run as root." >&2
@@ -28,13 +51,19 @@ YELLOW='\033[0;33m'
 NC='\033[0m'
 
 log() {
-    # Always append plain text (no color) to report file
-    echo -e "$1" >> "$REPORT"
+    if [[ "$USE_STDOUT" == true ]]; then
+        echo -e "$1"
+    else
+        echo -e "$1" >> "$REPORT"
+    fi
 }
 
 notify_warn() {
+    if [[ "$USE_NOTIFY" == false ]]; then return; fi
+
+    if command -v notify-send &>/dev/null; then
     local message="$1"
-    local uid=$(id -u alex)
+    local uid=$(id -u $REAL_USER)
     local dbus_socket="/run/user/$uid/bus"
 
     if [ -S "$dbus_socket" ]; then
@@ -43,6 +72,8 @@ notify_warn() {
     else
         echo "⚠️ Alert: $message" >&2
     fi
+fi
+
 }
 
 header() {
@@ -55,7 +86,7 @@ summarize_auditd(){
     log "🔍 AUDITD SUMMARY"
     log "--------------------------------------------------"
 
-    AUDIT_EVENTS=$(ausearch --start today --format raw 2>/dev/null | aureport --summary --event --interpret | grep -E "(USER_|CWD|EXECVE|SYSCALL)" | awk 'NF' || true)
+    AUDIT_EVENTS=$(ausearch --start "$CUSTOM_DATE" --format raw 2>/dev/null | aureport --summary --event --interpret | grep -E "(USER_|CWD|EXECVE|SYSCALL)" | awk 'NF' || true)
 
     if [[ -z "$AUDIT_EVENTS" ]]; then
         log "✅ No relevant audit events found."
@@ -100,7 +131,7 @@ summarize_etckeeper(){
         else
             log "$LAST_LOG"
             log ""
-            git diff HEAD~1 --color=never || true >> "$REPORT"
+            git diff HEAD~1 --color=never >> "$REPORT" || true
             notify_warn "Etckeeper detected recent config changes."
        fi
        cd - > /dev/null
@@ -112,27 +143,29 @@ summarize_etckeeper(){
 }
 
 main() {
+if [[ "$USE_STDOUT" == false ]]; then
     : > "$REPORT" #clear previous summary-latest.log
+fi
 
     header
     summarize_auditd
     summarize_aide
     summarize_etckeeper
 
-    echo -e "\n✅ Summary saved to: $REPORT"
+    log "\n✅ Summary saved to: $REPORT"
 
+    if [[ "$ARCHIVE" == true && "$USE_STDOUT" == false ]]; then
         # ─── Archive Report ─────────────────────────────────────
         ARCHIVE="$REPORT_DIR/summary-$(date '+%Y-%m-%d').log"
         cp "$REPORT" "$ARCHIVE"
-
-
     # ─── Gzip logs older than 7 days but newer than 60 ──────
     find "$REPORT_DIR" -type f -name 'summary-*.log' \
-        -mtime +7 -mtime -60 -exec gzip -f {} \;
+        -mtime +7 -mtime -60 -exec gzip -f '{}' ';'
 
     # ─── Delete gzipped logs older than 60 days ─────────────
     find "$REPORT_DIR" -type f -name 'summary-*.log.gz' \
-        -mtime +60 -delete       
+        -mtime +60 -delete
+    fi
 }
 
-main
+main "$@"
