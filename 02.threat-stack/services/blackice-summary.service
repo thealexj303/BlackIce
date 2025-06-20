@@ -1,0 +1,9 @@
+[Unit]
+Description=BlackIce Daily Summary Report
+Wants=blackice-summary.timer
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/blackice-daily-summary.sh
+User=root
+Group=root
